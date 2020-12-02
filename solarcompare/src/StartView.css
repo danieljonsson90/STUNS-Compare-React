@@ -1,0 +1,154 @@
+.wrapper {
+    height: 100%;
+    width: 75%;
+    justify-content: space-around;
+    display: flex;
+    flex-flow: row wrap;
+    /*overflow: auto;*/
+    justify-content: center;
+    margin: auto;
+}
+
+.table {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4caf50;
+    color: white;
+}
+
+#title {
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+.wrap {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+header {
+    padding: 10px 0;
+    background-color: #999;
+    margin-bottom: 60px;
+    box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+    color: white;
+    width: 75%;
+    margin: auto;
+}
+
+header button {
+    width: 150px;
+    height: 10%;
+    position: relative;
+    margin-bottom: 2px;
+    margin-top: 5px;
+    margin-right: 20px;
+    padding: 10px;
+    color: black;
+    border-radius: 0.5em;
+}
+
+header button:hover {
+    background-color: #ddd;
+}
+
+header h1 {
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+header nav {
+    padding: 10px;
+    text-align: center;
+}
+
+header p {
+    font-weight: bold;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.checkBox {
+    position: relative;
+    bottom: 80%;
+    left: 220px;
+}
+
+.card {
+    background: #fff;
+    border: 5px solid #fff;
+    border-radius: 2px;
+    margin: 20px 20px;
+    position: relative;
+    height: 300px;
+    width: 250px;
+    box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+    transition: box-shadow 0.1s ease-in-out;
+    text-align: left;
+}
+
+.card:hover {
+    box-shadow: 0 12px 24px #999, 0 12px 24px #999;
+    height: 300px;
+    width: 250;
+}
+
+.card>.img-container {
+    height: 80%;
+    overflow: hidden;
+}
+
+.card>.img-container>img {
+    width: 80%;
+}
+
+.card>.img-content {
+    margin-bottom: 1em;
+    font-size: 15px;
+    width: 220px;
+    position: relative;
+    bottom: 35px;
+    margin: auto;
+}
+
+.card>.img-content>ul {
+    list-style-type: none;
+}
+
+.animate {
+    animation: shake 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+    .card:hover {
+        height: 300px;
+        width: 250px;
+        box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+    }
+}
