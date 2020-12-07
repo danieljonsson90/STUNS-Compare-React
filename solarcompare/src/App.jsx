@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./StartView.css";
 import ListView from "./ListView";
 import DetailsView from "./DetailsView";
 import { PanelsProvider } from "./Contexts";
-//import { Form } from "react-final-form";
 
 const views = {
   DetailsView,
@@ -11,7 +10,7 @@ const views = {
 };
 
 function App() {
-  const [view, setView] = React.useState("ListView");
+  const [view, setView] = useState("ListView");
 
   const CurrentView = views[view];
 

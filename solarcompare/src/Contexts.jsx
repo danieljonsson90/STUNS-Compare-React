@@ -5,8 +5,7 @@ const PanelsStateContext = React.createContext();
 const PanelsDispatchContext = React.createContext();
 
 function reducer(state, action) {
-  console.log("reducer");
-  console.log("state", state);
+  console.log("state ", state);
   console.log("action", action);
   switch (action.type) {
     case "init":
@@ -30,18 +29,18 @@ function reducer(state, action) {
 }
 
 function getPanelsForList(panels) {
-  const selectablePanels = panels.reduce((acc, panel, i) => {
+  const selectablePanels = panels.reduce((acc, panel) => {
+    acc.push({ panels: [], selectablePanels: [] });
     if (panel.properties.length > 0) {
       if (
-        acc.find(
+        acc[0].selectablePanels.find(
           (item) =>
-            //item.properties.find((prop) => prop.key === "Model").value ===
             item.model ===
             panel.properties.find((prop) => prop.key === "Model").value
         )
       );
       else {
-        acc.push({
+        acc[0].selectablePanels.push({
           id: panel.identity,
           selected: false,
           brand: panel.properties.find((prop) => prop.key === "Brand").value,
@@ -51,14 +50,11 @@ function getPanelsForList(panels) {
             panel.properties.find((prop) => prop.key === "Model").value
           }.jpg`,
         });
+        acc[0].panels.push(panel);
       }
     }
-
     return acc;
   }, []);
-
-  //console.log("ModelList", ModelList);
-  //console.log("SelctablePanels", selectablePanels);
   return selectablePanels;
 }
 
@@ -75,8 +71,8 @@ function PanelsProvider({ children }) {
         dispatch({
           type: "init",
           data: {
-            panels: res.data,
-            selectablePanels: getPanelsForList(res.data),
+            panels: getPanelsForList(res.data)[0].panels,
+            selectablePanels: getPanelsForList(res.data)[0].selectablePanels,
           },
         });
       });

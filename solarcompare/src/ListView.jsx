@@ -8,20 +8,18 @@ import Checkbox from "./Checkbox";
 function ListView(props) {
   const { selectablePanels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-
-  function handleClick({ target: { value, checked } }) {
-    //ändra state för de solpaneler som är icheckade.
+  const headerTitle = "Jämför Solpaneler";
+  function handleClick({ target }) {
     dispatch({
       type: "toggleSelected",
-      id: value,
-      checked,
+      id: target.value,
+      checked: target.checked,
     });
   }
 
-  console.log(selectablePanels);
   return (
     <Wrapper>
-      <Navbar>
+      <Navbar title={headerTitle}>
         <button onClick={() => props.changeView("DetailsView")}>
           Jämför alla
         </button>

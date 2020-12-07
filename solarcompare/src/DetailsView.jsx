@@ -1,54 +1,124 @@
 import React from "react";
-import { usePanelsStateContext } from "./Contexts";
+import { usePanelsDispatchContext, usePanelsStateContext } from "./Contexts";
+import Navbar from "./Navbar";
 
 function DetailsView(props) {
-  const { selectablePanels } = usePanelsStateContext();
-  console.log(selectablePanels);
+  const { selectablePanels, panels } = usePanelsStateContext();
+  const dispatch = usePanelsDispatchContext();
+  console.log("panels", panels);
+  const headerTitle = "Solar Table";
   const TableHeaders = [
-    "Specifikationer",
-    "Märke",
-    "Model",
-    "Ram",
-    "Maxkapacitet (kWp)",
-    "Celltyp",
-    "Strömskenor",
-    "Effekt (%)",
-    "Mått",
-    "Höjd",
-    "Bredd",
-    "Vikt",
-    "Tjocklek",
-    "läs mer",
+    {
+      key: "-",
+      Header: "",
+    },
+    {
+      key: "-",
+      Header: "Specifikationer",
+    },
+    {
+      key: "Brand",
+      Header: "Märke",
+    },
+    {
+      key: "Model",
+      Header: "Model",
+    },
+    {
+      key: "ModuleType",
+      Header: "Ram",
+    },
+    {
+      key: "CellType",
+      Header: "Celltyp",
+    },
+    {
+      key: "Busbars",
+      Header: "Strömskenor",
+    },
+    {
+      key: "Efficiency",
+      Header: "Effekt (%)",
+    },
+    {
+      key: "-",
+      Header: "Mått",
+    },
+    {
+      key: "Height",
+      Header: "Höjd",
+    },
+    {
+      key: "Width",
+      Header: "Bredd",
+    },
+    {
+      key: "Weight",
+      Header: "Vikt",
+    },
+    {
+      key: "Thickness",
+      Header: "Tjocklek",
+    },
+    {
+      key: "-",
+      Header: "Läs mer",
+    },
   ];
-  function RenderData(data, index) {
-    return (
-      <tr key={index}>
-        <td>{data.deviceId}</td>
-        <td>{data.identity}</td>
-        <td>{data.displayName}</td>
-      </tr>
-    );
-  }
+  const TableStyles = {
+    width: "75%",
+    margin: "auto",
+    overflow: "auto",
+  };
+  const NumberOfTableRows = TableHeaders.length;
 
   function handleClick() {
-    //ändra state för de solpaneler som är icheckade.
-    selectablePanels.map((panel) => {
-      return panel.clicked === false;
-    });
-    console.log(selectablePanels);
     props.changeView("ListView");
+  }
+
+  function RenderData(panel, tableHeaderIndex, panelIndex) {
+    if (tableHeaderIndex === 0) {
+      return (
+        <img
+          src={selectablePanels[panelIndex].image}
+          alt={selectablePanels[panelIndex].model}
+        ></img>
+      );
+    }
+    if (
+      panel.properties.find(
+        (prop) => prop.key === TableHeaders[tableHeaderIndex].key
+      )
+    ) {
+      return panel.properties.find(
+        (prop) => prop.key === TableHeaders[tableHeaderIndex].key
+      ).value;
+    }
+    return "-";
   }
 
   return (
     <div>
-      <button onClick={handleClick}>Go back to start!</button>
+      <Navbar title={headerTitle}>
+        <button onClick={handleClick}>Go back to start!</button>
+      </Navbar>
       {selectablePanels ? (
-        <div>
-          <h1 id="title">Solar Table</h1>
+        <div style={TableStyles}>
           <table id="solarPanels">
             <thead id="headers">
-              {TableHeaders.map((data, index) => {
-                return <tr key={index}>{data}</tr>;
+              {TableHeaders.map((data, tableHeaderIndex) => {
+                return (
+                  <tr key={tableHeaderIndex}>
+                    <th>{data.Header}</th>
+                    {panels.map((panel, panelIndex) => {
+                      return (
+                        <td>
+                          {RenderData(panel, tableHeaderIndex, panelIndex)}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
               })}
             </thead>
             <tbody>{/*data.map(RenderData)*/}</tbody>
