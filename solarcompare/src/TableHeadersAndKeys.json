@@ -1,0 +1,57 @@
+[{
+        "key": "-",
+        "Header": ""
+    },
+    {
+        "key": "-",
+        "Header": "Specifikationer"
+    },
+    {
+        "key": "Brand",
+        "Header": "Märke"
+    },
+    {
+        "key": "Model",
+        "Header": "Model"
+    },
+    {
+        "key": "ModuleType",
+        "Header": "Ram"
+    },
+    {
+        "key": "CellType",
+        "Header": "Celltyp"
+    },
+    {
+        "key": "Busbars",
+        "Header": "Strömskenor"
+    },
+    {
+        "key": "Efficiency",
+        "Header": "Effekt (%)"
+    },
+    {
+        "key": "-",
+        "Header": "Mått"
+    },
+    {
+        "key": "Height",
+        "Header": "Höjd"
+    },
+    {
+        "key": "Width",
+        "Header": "Bredd"
+    },
+    {
+        "key": "Weight",
+        "Header": "Vikt"
+    },
+    {
+        "key": "Thickness",
+        "Header": "Tjocklek"
+    },
+    {
+        "key": "-",
+        "Header": "Läs mer"
+    }
+]

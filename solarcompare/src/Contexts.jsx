@@ -17,10 +17,30 @@ function reducer(state, action) {
           if (panel.id === action.id) {
             return {
               ...panel,
-              selected: action.checked,
+              selected: !panel.selected,
             };
           }
           return panel;
+        }),
+      };
+    case "SelectAll":
+      return {
+        ...state,
+        selectablePanels: state.selectablePanels.map((panel) => {
+          return {
+            ...panel,
+            selected: true,
+          };
+        }),
+      };
+    case "UnSelectAll":
+      return {
+        ...state,
+        selectablePanels: state.selectablePanels.map((panel) => {
+          return {
+            ...panel,
+            selected: false,
+          };
         }),
       };
     default:
@@ -38,6 +58,13 @@ function getPanelsForList(panels) {
             item.model ===
             panel.properties.find((prop) => prop.key === "Model").value
         )
+      );
+      else if (
+        // Jag hittade inte att det fanns någon modell p6_61 eller p6_62
+        // så därför vill jag inte lägga till dem i panellistan.
+        panel.properties.find((prop) => prop.key === "Model").value ===
+          "P6_61" ||
+        panel.properties.find((prop) => prop.key === "Model").value === "P6_62"
       );
       else {
         acc[0].selectablePanels.push({

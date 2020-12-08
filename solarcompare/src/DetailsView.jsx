@@ -1,98 +1,49 @@
 import React from "react";
 import { usePanelsDispatchContext, usePanelsStateContext } from "./Contexts";
 import Navbar from "./Navbar";
+import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
+
+const TableStyles = {
+  width: "75%",
+  margin: "auto",
+  overflow: "auto",
+};
+const headerTitle = "Tabell för Solpaneler";
 
 function DetailsView(props) {
   const { selectablePanels, panels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-  console.log("panels", panels);
-  const headerTitle = "Solar Table";
-  const TableHeaders = [
-    {
-      key: "-",
-      Header: "",
-    },
-    {
-      key: "-",
-      Header: "Specifikationer",
-    },
-    {
-      key: "Brand",
-      Header: "Märke",
-    },
-    {
-      key: "Model",
-      Header: "Model",
-    },
-    {
-      key: "ModuleType",
-      Header: "Ram",
-    },
-    {
-      key: "CellType",
-      Header: "Celltyp",
-    },
-    {
-      key: "Busbars",
-      Header: "Strömskenor",
-    },
-    {
-      key: "Efficiency",
-      Header: "Effekt (%)",
-    },
-    {
-      key: "-",
-      Header: "Mått",
-    },
-    {
-      key: "Height",
-      Header: "Höjd",
-    },
-    {
-      key: "Width",
-      Header: "Bredd",
-    },
-    {
-      key: "Weight",
-      Header: "Vikt",
-    },
-    {
-      key: "Thickness",
-      Header: "Tjocklek",
-    },
-    {
-      key: "-",
-      Header: "Läs mer",
-    },
-  ];
-  const TableStyles = {
-    width: "75%",
-    margin: "auto",
-    overflow: "auto",
-  };
-  const NumberOfTableRows = TableHeaders.length;
+  console.log("selectablePanels", selectablePanels);
+  let RowId;
 
   function handleClick() {
+    dispatch({
+      type: "UnSelectAll",
+    });
     props.changeView("ListView");
   }
 
   function RenderData(panel, tableHeaderIndex, panelIndex) {
     if (tableHeaderIndex === 0) {
       return (
-        <img
-          src={selectablePanels[panelIndex].image}
-          alt={selectablePanels[panelIndex].model}
-        ></img>
+        <div>
+          <img
+            src={selectablePanels[panelIndex].image}
+            alt={selectablePanels[panelIndex].model}
+          />
+          <button>X</button>
+        </div>
       );
-    }
-    if (
+    } else if (
       panel.properties.find(
-        (prop) => prop.key === TableHeaders[tableHeaderIndex].key
+        (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
       )
     ) {
       return panel.properties.find(
-        (prop) => prop.key === TableHeaders[tableHeaderIndex].key
+        (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
       ).value;
+    } else if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+      return "";
     }
     return "-";
   }
@@ -104,24 +55,30 @@ function DetailsView(props) {
       </Navbar>
       {selectablePanels ? (
         <div style={TableStyles}>
-          <table id="solarPanels">
-            <thead id="headers">
-              {TableHeaders.map((data, tableHeaderIndex) => {
+          <table id="solarPanels" style={{ width: "100%" }}>
+            <tbody>
+              {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
+                if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+                  RowId = "TableHeadline";
+                } else {
+                  RowId = "";
+                }
                 return (
-                  <tr key={tableHeaderIndex}>
+                  <tr key={tableHeaderIndex} id={RowId}>
                     <th>{data.Header}</th>
                     {panels.map((panel, panelIndex) => {
-                      return (
-                        <td>
-                          {RenderData(panel, tableHeaderIndex, panelIndex)}
-                        </td>
-                      );
+                      if (selectablePanels[panelIndex].selected) {
+                        return (
+                          <td>
+                            {RenderData(panel, tableHeaderIndex, panelIndex)}
+                          </td>
+                        );
+                      }
                     })}
                   </tr>
                 );
               })}
-            </thead>
-            <tbody>{/*data.map(RenderData)*/}</tbody>
+            </tbody>
           </table>
         </div>
       ) : (

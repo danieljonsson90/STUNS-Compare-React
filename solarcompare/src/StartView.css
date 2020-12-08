@@ -32,6 +32,10 @@ tr:hover {
     background-color: #ddd;
 }
 
+#TableHeadline {
+    background: #777;
+}
+
 th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -96,7 +100,7 @@ header p {
 .checkBox {
     position: relative;
     bottom: 80%;
-    left: 220px;
+    left: 90%;
 }
 
 .card {

@@ -5,10 +5,12 @@ import Wrapper from "./Wrapper";
 import { usePanelsStateContext, usePanelsDispatchContext } from "./Contexts";
 import Checkbox from "./Checkbox";
 
+const headerTitle = "Jämför Solpaneler";
+
 function ListView(props) {
   const { selectablePanels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-  const headerTitle = "Jämför Solpaneler";
+
   function handleClick({ target }) {
     dispatch({
       type: "toggleSelected",
@@ -17,13 +19,34 @@ function ListView(props) {
     });
   }
 
+  function ChangeView(str) {
+    switch (str) {
+      case "Jämför Alla":
+        dispatch({
+          type: "SelectAll",
+        });
+        props.changeView("DetailsView");
+        break;
+      case "Jämför Markerade":
+        for (let panel of selectablePanels) {
+          if (panel.selected) {
+            props.changeView("DetailsView");
+            break;
+          } else {
+            alert("Du måste checka i någon panel");
+            break;
+          }
+        }
+        break;
+      default:
+    }
+  }
+
   return (
     <Wrapper>
       <Navbar title={headerTitle}>
-        <button onClick={() => props.changeView("DetailsView")}>
-          Jämför alla
-        </button>
-        <button onClick={() => props.changeView("DetailsView")}>
+        <button onClick={() => ChangeView("Jämför Alla")}>Jämför alla</button>
+        <button onClick={() => ChangeView("Jämför Markerade")}>
           Jämför Markerade
         </button>
       </Navbar>
