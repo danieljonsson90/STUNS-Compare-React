@@ -72,6 +72,8 @@ function getPanelsForList(panels) {
           selected: false,
           brand: panel.properties.find((prop) => prop.key === "Brand").value,
           model: panel.properties.find((prop) => prop.key === "Model").value,
+          celltype: panel.properties.find((prop) => prop.key === "CellType")
+            .value,
           power: panel.properties.find((prop) => prop.key === "Power").value,
           image: `/img/sol-${
             panel.properties.find((prop) => prop.key === "Model").value

@@ -18,7 +18,11 @@ function PanelCard(props) {
             {props.solarpanel.model}
           </li>
           <li>
-            <strong>Maxeffekt: </strong>
+            <strong>Celltyp: </strong>
+            {props.solarpanel.celltype}
+          </li>
+          <li>
+            <strong>Maxeffekt (kWp) : </strong>
             {props.solarpanel.power}
           </li>
         </ul>

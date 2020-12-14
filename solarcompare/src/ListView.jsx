@@ -15,7 +15,6 @@ function ListView(props) {
     dispatch({
       type: "toggleSelected",
       id: target.value,
-      checked: target.checked,
     });
   }
 
@@ -28,16 +27,19 @@ function ListView(props) {
         props.changeView("DetailsView");
         break;
       case "Jämför Markerade":
+        let selected = false;
         for (let panel of selectablePanels) {
           if (panel.selected) {
             props.changeView("DetailsView");
-            break;
-          } else {
-            alert("Du måste checka i någon panel");
+            selected = true;
             break;
           }
         }
+        if (!selected) {
+          alert("Du måste checka i någon panel");
+        }
         break;
+
       default:
     }
   }
