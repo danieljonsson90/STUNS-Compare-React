@@ -5,8 +5,6 @@ const PanelsStateContext = React.createContext();
 const PanelsDispatchContext = React.createContext();
 
 function reducer(state, action) {
-  console.log("state ", state);
-  console.log("action", action);
   switch (action.type) {
     case "init":
       return action.data;
@@ -76,6 +74,9 @@ function getPanelsForList(panels) {
             .value,
           power: panel.properties.find((prop) => prop.key === "Power").value,
           image: `/img/sol-${
+            panel.properties.find((prop) => prop.key === "Model").value
+          }.jpg`,
+          smallImage: `/img/small/sol-${
             panel.properties.find((prop) => prop.key === "Model").value
           }.jpg`,
         });

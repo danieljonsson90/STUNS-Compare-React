@@ -20,13 +20,13 @@ function ListView(props) {
 
   function ChangeView(str) {
     switch (str) {
-      case "Jämför Alla":
+      case "Compare All":
         dispatch({
           type: "SelectAll",
         });
         props.changeView("DetailsView");
         break;
-      case "Jämför Markerade":
+      case "Compare Selected":
         let selected = false;
         for (let panel of selectablePanels) {
           if (panel.selected) {
@@ -47,8 +47,8 @@ function ListView(props) {
   return (
     <Wrapper>
       <Navbar title={headerTitle}>
-        <button onClick={() => ChangeView("Jämför Alla")}>Jämför alla</button>
-        <button onClick={() => ChangeView("Jämför Markerade")}>
+        <button onClick={() => ChangeView("Compare All")}>Jämför alla</button>
+        <button onClick={() => ChangeView("Compare Selected")}>
           Jämför Markerade
         </button>
       </Navbar>

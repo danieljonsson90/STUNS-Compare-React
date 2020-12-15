@@ -8,7 +8,6 @@ const TableStyles = {
   margin: "auto",
   marginLeft: "0",
   overflow: "auto",
-  border: "solid 1px",
   gridColumnStart: "1",
   gridColumnEnd: "2",
 };
@@ -20,15 +19,14 @@ function DetailsView(props) {
   console.log("selectablePanels", selectablePanels);
   let RowId;
 
-  function handleClick() {
+  function handleClickUnselectAll() {
     dispatch({
       type: "UnSelectAll",
     });
     props.changeView("ListView");
   }
 
-  function handleRemoveClick({ target }) {
-    console.dir(target);
+  function handleClick({ target }) {
     dispatch({
       type: "toggleSelected",
       id: target.value,
@@ -41,7 +39,7 @@ function DetailsView(props) {
           <div className="RemoveButtonContainer">
             <button
               value={selectablePanels[panelIndex].id}
-              onClick={handleRemoveClick}
+              onClick={handleClick}
             >
               X
             </button>
@@ -71,7 +69,7 @@ function DetailsView(props) {
   return (
     <div>
       <Navbar title={headerTitle}>
-        <button onClick={handleClick}>Tillbaka</button>
+        <button onClick={handleClickUnselectAll}>Tillbaka</button>
       </Navbar>
       {selectablePanels ? (
         <div className="TableAndSideMenu">
@@ -95,6 +93,7 @@ function DetailsView(props) {
                             </td>
                           );
                         }
+                        return <> </>;
                       })}
                     </tr>
                   );
@@ -102,11 +101,20 @@ function DetailsView(props) {
               </tbody>
             </table>
           </div>
-          <div className="sideMenu">
-            <button>SidePanel</button>
-            <button>SidePanel</button>
-            <button>SidePanel</button>
-            <button>SidePanel</button>
+          <div className="sideMenuContainer">
+            {selectablePanels.map((panel, panelIndex) => {
+              if (!selectablePanels[panelIndex].selected) {
+                return (
+                  <button
+                    value={selectablePanels[panelIndex].id}
+                    onClick={handleClick}
+                  >
+                    <img src={panel.smallImage} alt={panel.model} />
+                  </button>
+                );
+              }
+              return <> </>;
+            })}
           </div>
         </div>
       ) : (

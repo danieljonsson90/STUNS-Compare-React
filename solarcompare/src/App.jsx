@@ -11,7 +11,6 @@ const views = {
 
 function App() {
   const [view, setView] = useState("ListView");
-
   const CurrentView = views[view];
 
   return (
