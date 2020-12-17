@@ -2,11 +2,11 @@ import React from "react";
 
 function PanelCard(props) {
   return (
-    <div className="card ">
+    <div className="panelCard">
       <div className="img-container">
         <img alt={props.solarpanel.model} src={props.solarpanel.image} />
       </div>
-      <div className="checkBox">{props.checkBox}</div>
+      <div className="checkboxContainer">{props.checkBox}</div>
       <div className="img-content">
         <ul>
           <li>

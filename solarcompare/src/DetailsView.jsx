@@ -1,23 +1,16 @@
 import React from "react";
 import { usePanelsDispatchContext, usePanelsStateContext } from "./Contexts";
-import Navbar from "./Navbar";
-import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
+import Navbar from "./Navbar.jsx";
+import SmallPanelCard from "./SmallPanelCard";
+import TableComponent from "./TableComponent";
+import Wrapper from "./Wrapper";
 
-const TableStyles = {
-  width: "97%",
-  margin: "auto",
-  marginLeft: "0",
-  overflow: "auto",
-  gridColumnStart: "1",
-  gridColumnEnd: "2",
-};
 const headerTitle = "Tabell för Solpaneler";
+const sideMenuTitle = "Lägg till Paneler";
 
 function DetailsView(props) {
   const { selectablePanels, panels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-  console.log("selectablePanels", selectablePanels);
-  let RowId;
 
   function handleClickUnselectAll() {
     dispatch({
@@ -27,90 +20,43 @@ function DetailsView(props) {
   }
 
   function handleClick({ target }) {
+    // value för img blev undefined men inte id
+    // därav denna if sats.
+    if (target.id !== "") target.value = target.id;
     dispatch({
       type: "toggleSelected",
       id: target.value,
     });
   }
-  function RenderData(panel, tableHeaderIndex, panelIndex) {
-    if (tableHeaderIndex === 0) {
-      return (
-        <div>
-          <div className="RemoveButtonContainer">
-            <button
-              value={selectablePanels[panelIndex].id}
-              onClick={handleClick}
-            >
-              X
-            </button>
-          </div>
-          <div className="img-container">
-            <img
-              src={selectablePanels[panelIndex].image}
-              alt={selectablePanels[panelIndex].model}
-            />
-          </div>
-        </div>
-      );
-    } else if (
-      panel.properties.find(
-        (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
-      )
-    ) {
-      return panel.properties.find(
-        (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
-      ).value;
-    } else if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
-      return "";
+
+  function RenderSideMenuTitle() {
+    for (let panel of selectablePanels) {
+      if (!panel.selected) return <p>{sideMenuTitle}</p>;
     }
-    return "-";
   }
 
   return (
-    <div>
+    <Wrapper class="detailWrapper">
       <Navbar title={headerTitle}>
         <button onClick={handleClickUnselectAll}>Tillbaka</button>
       </Navbar>
       {selectablePanels ? (
         <div className="TableAndSideMenu">
-          <div style={TableStyles}>
-            <table id="solarPanels">
-              <tbody>
-                {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
-                  if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
-                    RowId = "TableHeadline";
-                  } else {
-                    RowId = "";
-                  }
-                  return (
-                    <tr key={tableHeaderIndex} id={RowId}>
-                      <th id="firstColumn">{data.Header}</th>
-                      {panels.map((panel, panelIndex) => {
-                        if (selectablePanels[panelIndex].selected) {
-                          return (
-                            <td>
-                              {RenderData(panel, tableHeaderIndex, panelIndex)}
-                            </td>
-                          );
-                        }
-                        return <> </>;
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <TableComponent
+            panels={panels}
+            selectablePanels={selectablePanels}
+            onClick={handleClick}
+          />
           <div className="sideMenuContainer">
-            {selectablePanels.map((panel, panelIndex) => {
-              if (!selectablePanels[panelIndex].selected) {
+            <p>{RenderSideMenuTitle()}</p>
+            {selectablePanels.map((selectablePanel, index) => {
+              if (!selectablePanel.selected) {
                 return (
-                  <button
-                    value={selectablePanels[panelIndex].id}
+                  <SmallPanelCard
+                    key={index}
                     onClick={handleClick}
-                  >
-                    <img src={panel.smallImage} alt={panel.model} />
-                  </button>
+                    panel={selectablePanel}
+                  />
                 );
               }
               return <> </>;
@@ -120,7 +66,7 @@ function DetailsView(props) {
       ) : (
         <h3>wait data is fetching</h3>
       )}
-    </div>
+    </Wrapper>
   );
 }
 

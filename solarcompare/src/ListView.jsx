@@ -1,6 +1,6 @@
 import PanelCard from "./PanelCard";
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.jsx";
 import Wrapper from "./Wrapper";
 import { usePanelsStateContext, usePanelsDispatchContext } from "./Contexts";
 import Checkbox from "./Checkbox";
@@ -45,23 +45,24 @@ function ListView(props) {
   }
 
   return (
-    <Wrapper>
+    <div>
       <Navbar title={headerTitle}>
         <button onClick={() => ChangeView("Compare All")}>Jämför alla</button>
         <button onClick={() => ChangeView("Compare Selected")}>
           Jämför Markerade
         </button>
       </Navbar>
-
-      {selectablePanels.map((panel, index) => (
-        <PanelCard
-          key={index}
-          onClick={handleClick}
-          solarpanel={panel}
-          checkBox={<Checkbox value={panel.id} onChange={handleClick} />}
-        />
-      ))}
-    </Wrapper>
+      <Wrapper class="listWrapper">
+        {selectablePanels.map((panel, index) => (
+          <PanelCard
+            key={index}
+            onClick={handleClick}
+            solarpanel={panel}
+            checkBox={<Checkbox value={panel.id} onChange={handleClick} />}
+          />
+        ))}
+      </Wrapper>
+    </div>
   );
 }
 

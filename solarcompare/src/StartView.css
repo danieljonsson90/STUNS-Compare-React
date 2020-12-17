@@ -1,45 +1,42 @@
 /*ListView*/
 
-.wrapper {
+.listWrapper {
     height: 100%;
-    width: 75%;
+    width: 70%;
     justify-content: space-around;
     display: flex;
     flex-flow: row wrap;
-    /*overflow: auto;*/
     justify-content: center;
     margin: auto;
 }
 
-.card {
+.panelCard {
     background: #fff;
     border: 5px solid #fff;
     border-radius: 2px;
-    margin: 20px 20px;
-    position: relative;
+    margin: 10px 10px;
     height: 300px;
-    width: 250px;
+    width: 23%;
+    justify-content: center;
     box-shadow: 0 3px 6px #999, 0 3px 6px #999;
     transition: box-shadow 0.1s ease-in-out;
     text-align: left;
 }
 
-.card:hover {
+.panelCard:hover {
     box-shadow: 0 12px 24px #999, 0 12px 24px #999;
-    height: 300px;
-    width: 250;
 }
 
-.card>.img-container {
+.panelCard>.img-container {
     height: 80%;
     overflow: hidden;
 }
 
-.card>.img-container>img {
+.panelCard>.img-container>img {
     width: 80%;
 }
 
-.card>.img-content {
+.panelCard>.img-content {
     font-size: 90%;
     width: 90%;
     position: relative;
@@ -47,26 +44,56 @@
     margin: auto;
 }
 
-.card>.img-content>ul {
+.panelCard>.img-content>ul {
     list-style-type: none;
 }
 
 @media only screen and (max-width: 600px) {
-    .card:hover {
+    .panelCard:hover {
         height: 300px;
         width: 250px;
         box-shadow: 0 3px 6px #999, 0 3px 6px #999;
     }
 }
 
-.checkBox {
+.checkboxContainer {
     position: relative;
-    bottom: 80%;
     left: 90%;
+    bottom: 80%;
 }
 
 
 /*DetailView*/
+
+.SmallPanelCard button {
+    background-color: white;
+}
+
+.SmallPanelCard button .img-content {
+    font-size: 90%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.SmallPanelCard .img-content ul {
+    list-style-type: none;
+    text-align: left;
+    margin: auto;
+    padding-left: 0;
+}
+
+.SmallPanelCard .img-content ul li {
+    text-align: left;
+}
+
+.detailWrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto;
+}
 
 table {
     width: 100%;
@@ -79,7 +106,6 @@ table {
     margin-top: 1%;
     width: 90%;
     padding: 0;
-    overflow: auto;
 }
 
 td,
@@ -130,14 +156,16 @@ th {
     display: flex;
     flex-flow: column wrap;
     grid-column-start: 2;
+    text-align: center;
 }
 
-.sideMenuContainer>button {
-    background-color: #fff;
-    justify-content: center;
-    align-self: top;
-    width: 100%;
-    cursor: pointer;
+.sideMenuContainer p {
+    margin-top: 0;
+    font-size: 25px;
+    background-color: #aaa;
+    color: #fff;
+    margin-bottom: 5px;
+    vertical-align: center;
 }
 
 
@@ -145,11 +173,17 @@ th {
 
 .Navbar {
     padding: 10px 0;
-    background-color: #999;
+    background-color: #aaa;
     margin-bottom: 60px;
     box-shadow: 0 3px 6px #999, 0 3px 6px #999;
     color: white;
-    width: 80%;
+    width: 75%;
+    margin: auto;
+    text-align: center;
+}
+
+.STUNSenergi {
+    width: 50%;
     margin: auto;
 }
 
