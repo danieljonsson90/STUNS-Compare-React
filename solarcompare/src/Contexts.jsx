@@ -4,6 +4,8 @@ import axios from "axios";
 const PanelsStateContext = React.createContext();
 const PanelsDispatchContext = React.createContext();
 
+const APIURL = "https://stunssolar.azurewebsites.net/api/devices";
+
 function reducer(state, action) {
   switch (action.type) {
     case "init":
@@ -46,7 +48,7 @@ function reducer(state, action) {
   }
 }
 
-function getPanelsForList(panels) {
+function getPanelsForLists(panels) {
   const selectablePanels = panels.reduce((acc, panel) => {
     acc.push({ panels: [], selectablePanels: [] });
     if (panel.properties.length > 0) {
@@ -60,6 +62,8 @@ function getPanelsForList(panels) {
       else if (
         // Jag hittade inte att det fanns någon modell p6_61 eller p6_62
         // så därför vill jag inte lägga till dem i panellistan.
+        // Det är tydligen ett fel i datatbasen så om den uppdateras
+        // kan denna sats tas bort.
         panel.properties.find((prop) => prop.key === "Model").value ===
           "P6_61" ||
         panel.properties.find((prop) => prop.key === "Model").value === "P6_62"
@@ -95,17 +99,15 @@ function PanelsProvider({ children }) {
   });
 
   React.useEffect(() => {
-    axios
-      .get("https://stunssolar.azurewebsites.net/api/devices")
-      .then((res) => {
-        dispatch({
-          type: "init",
-          data: {
-            panels: getPanelsForList(res.data)[0].panels,
-            selectablePanels: getPanelsForList(res.data)[0].selectablePanels,
-          },
-        });
+    axios.get(APIURL).then((res) => {
+      dispatch({
+        type: "init",
+        data: {
+          panels: getPanelsForLists(res.data)[0].panels,
+          selectablePanels: getPanelsForLists(res.data)[0].selectablePanels,
+        },
       });
+    });
   }, []);
 
   return (

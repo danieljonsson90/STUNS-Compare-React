@@ -2,17 +2,14 @@ import React from "react";
 
 function Navbar(props) {
   return (
-    <header className="Navbar">
-      <div className="row">
-        <img
-          className="STUNSenergi"
-          src={"./img/STUNSenergi.png"}
-          alt={"STUNSenergi"}
-        />
-        <h1 className="col-sm-8"> {props.title} </h1>
-        <nav className="col-sm-4"> {props.children} </nav>
-      </div>
-    </header>
+    <nav className="Navbar">
+      {
+        props.children
+        /*
+        <a href="https://energiportalregionuppsala.se/">Hem</a>
+        <a href="./About.html">Om projektet</a>*/
+      }
+    </nav>
   );
 }
 

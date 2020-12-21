@@ -3,11 +3,13 @@ import { usePanelsDispatchContext, usePanelsStateContext } from "./Contexts";
 import Navbar from "./Navbar.jsx";
 import SmallPanelCard from "./SmallPanelCard";
 import TableComponent from "./TableComponent";
-import Wrapper from "./Wrapper";
+import Wrapper from "./Wrapper.jsx";
+import Header from "./Header.jsx";
+import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
 
 const headerTitle = "Tabell för Solpaneler";
 const sideMenuTitle = "Lägg till Paneler";
-
+let RowId;
 function DetailsView(props) {
   const { selectablePanels, panels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
@@ -36,19 +38,47 @@ function DetailsView(props) {
   }
 
   return (
-    <Wrapper class="detailWrapper">
-      <Navbar title={headerTitle}>
+    <Wrapper classProp="detailWrapper">
+      <Header>
+        <Navbar></Navbar>
+        <h1>{headerTitle}</h1>
+        <div>
+          <a href="https://energiportalregionuppsala.se/">
+            <img
+              className="STUNSenergi"
+              src={"./img/STUNSenergi.png"}
+              alt={"STUNSenergi"}
+            />
+          </a>
+        </div>
         <button onClick={handleClickUnselectAll}>Tillbaka</button>
-      </Navbar>
+      </Header>
       {selectablePanels ? (
         <div className="TableAndSideMenu">
+          <table className="tableHeaders">
+            <tbody>
+              {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
+                if (tableHeaderIndex === 0) return <></>;
+                if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+                  RowId = "TableHeadline";
+                } else {
+                  RowId = "";
+                }
+                return (
+                  <tr key={tableHeaderIndex} id={RowId}>
+                    <th id="firstColumn">{data.Header}</th>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
           <TableComponent
             panels={panels}
             selectablePanels={selectablePanels}
             onClick={handleClick}
           />
           <div className="sideMenuContainer">
-            <p>{RenderSideMenuTitle()}</p>
+            <div className="sideMenuTitle">{RenderSideMenuTitle()}</div>
             {selectablePanels.map((selectablePanel, index) => {
               if (!selectablePanel.selected) {
                 return (

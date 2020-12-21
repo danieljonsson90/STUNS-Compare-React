@@ -2,13 +2,14 @@ import React from "react";
 import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
 
 const TableStyles = {
-  width: "97%",
+  width: "100%",
   margin: "auto",
   marginLeft: "0",
+  marginRight: "1%",
   marginTop: "0",
   overflow: "auto",
-  gridColumnStart: "1",
-  gridColumnEnd: "2",
+  gridColumnStart: "2",
+  gridColumnEnd: "3",
   gridRowStart: "1",
 };
 
@@ -35,6 +36,19 @@ function TableComponent(props) {
           </div>
         </div>
       );
+    } else if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+      return "";
+    } else if (
+      tableHeaderIndex === 7 &&
+      panel.properties.find(
+        (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
+      )
+    ) {
+      return (
+        panel.properties.find(
+          (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
+        ).value * 100
+      ).toFixed(1);
     } else if (
       panel.properties.find(
         (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
@@ -43,8 +57,6 @@ function TableComponent(props) {
       return panel.properties.find(
         (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
       ).value;
-    } else if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
-      return "";
     }
     return "-";
   }
@@ -61,11 +73,13 @@ function TableComponent(props) {
             }
             return (
               <tr key={tableHeaderIndex} id={RowId}>
-                <th id="firstColumn">{data.Header}</th>
+                {/*<th id="firstColumn">{data.Header}</th>*/}
                 {props.panels.map((panel, panelIndex) => {
                   if (props.selectablePanels[panelIndex].selected) {
                     return (
-                      <td>{RenderData(panel, tableHeaderIndex, panelIndex)}</td>
+                      <td key={panelIndex}>
+                        {RenderData(panel, tableHeaderIndex, panelIndex)}
+                      </td>
                     );
                   }
                   return <> </>;

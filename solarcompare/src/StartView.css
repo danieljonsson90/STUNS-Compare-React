@@ -1,8 +1,7 @@
 /*ListView*/
 
 .listWrapper {
-    height: 100%;
-    width: 70%;
+    width: 80%;
     justify-content: space-around;
     display: flex;
     flex-flow: row wrap;
@@ -13,7 +12,7 @@
 .panelCard {
     background: #fff;
     border: 5px solid #fff;
-    border-radius: 2px;
+    border-radius: 5px;
     margin: 10px 10px;
     height: 300px;
     width: 23%;
@@ -67,6 +66,7 @@
 
 .SmallPanelCard button {
     background-color: white;
+    min-width: 100%;
 }
 
 .SmallPanelCard button .img-content {
@@ -101,7 +101,8 @@ table {
 
 .TableAndSideMenu {
     display: grid;
-    grid-template-columns: 88.6% 11.4%;
+    grid-template-columns: 13.6% 75% 11.4%;
+    margin: auto;
     margin-left: 10%;
     margin-top: 1%;
     width: 90%;
@@ -111,8 +112,12 @@ table {
 td,
 th {
     border: 1px solid #ddd;
-    padding: 8px;
     text-align: center;
+}
+
+#solarPanels td,
+th {
+    height: 50px;
 }
 
 #firstColumn {
@@ -135,13 +140,6 @@ tr:nth-child(1):hover {
     background: #777;
 }
 
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
 .RemoveButtonContainer {
     position: relative;
     left: 46%;
@@ -155,8 +153,11 @@ th {
 .sideMenuContainer {
     display: flex;
     flex-flow: column wrap;
-    grid-column-start: 2;
+    grid-column-start: 3;
     text-align: center;
+    margin-left: 3%;
+    grid-row-start: 1;
+    grid-row-end: 3;
 }
 
 .sideMenuContainer p {
@@ -168,18 +169,52 @@ th {
     vertical-align: center;
 }
 
+.tableHeaders {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-top: 282px;
+}
+
 
 /*Detail and List*/
 
-.Navbar {
+header {
     padding: 10px 0;
     background-color: #aaa;
     margin-bottom: 60px;
+    padding-bottom: 25px;
     box-shadow: 0 3px 6px #999, 0 3px 6px #999;
     color: white;
-    width: 75%;
+    width: 80%;
     margin: auto;
     text-align: center;
+    border: solid 1px;
+}
+
+nav a:link,
+a:visited {
+    background-color: #777;
+    color: darkorange;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 0.5%;
+}
+
+header h1 {
+    margin: 2% auto;
+}
+
+nav a:hover {
+    background-color: #777;
+    color: darkorange;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: underline;
+    display: inline-block;
+    border-radius: 5px;
 }
 
 .STUNSenergi {
@@ -187,7 +222,7 @@ th {
     margin: auto;
 }
 
-.Navbar button {
+header button {
     width: 150px;
     height: 10%;
     position: relative;
