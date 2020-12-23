@@ -11,7 +11,7 @@ import SideMenu from "./SideMenu.jsx";
 const headerTitle = "Tabell för Solpaneler";
 
 function DetailsView(props) {
-  const { selectablePanels, panels } = usePanelsStateContext();
+  const { selectablePanels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
 
   function handleClickUnselectAll() {
@@ -22,7 +22,7 @@ function DetailsView(props) {
   }
 
   function handleClick({ target }) {
-    // value för img i TableComponent blev undefined men inte id
+    // value för img i SmallPanelCard är undefined men inte id
     // därav denna if sats.
     if (target.id !== "") target.value = target.id;
     dispatch({
@@ -42,15 +42,8 @@ function DetailsView(props) {
       {selectablePanels ? (
         <div className="TableAndSideMenu">
           <TableWithHeaders />
-          <TableComponent
-            panels={panels}
-            selectablePanels={selectablePanels}
-            onClick={handleClick}
-          />
-          <SideMenu
-            selectablePanels={selectablePanels}
-            handleClick={handleClick}
-          />
+          <TableComponent onClick={handleClick} />
+          <SideMenu onClick={handleClick} />
         </div>
       ) : (
         <h3>wait data is fetching</h3>

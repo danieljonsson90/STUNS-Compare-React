@@ -1,4 +1,5 @@
 import React from "react";
+import TextForCard from "./TextForCard";
 
 function PanelCard(props) {
   return (
@@ -7,26 +8,7 @@ function PanelCard(props) {
         <img alt={props.solarpanel.model} src={props.solarpanel.image} />
       </div>
       <div className="checkboxContainer">{props.checkBox}</div>
-      <div className="img-content">
-        <ul>
-          <li>
-            <strong>Märke: </strong>
-            {props.solarpanel.brand}
-          </li>
-          <li>
-            <strong>Model: </strong>
-            {props.solarpanel.model}
-          </li>
-          <li>
-            <strong>Celltyp: </strong>
-            {props.solarpanel.celltype}
-          </li>
-          <li>
-            <strong>Maxeffekt (kWp) : </strong>
-            {props.solarpanel.power}
-          </li>
-        </ul>
-      </div>
+      <TextForCard solarpanel={props.solarpanel} />
     </div>
   );
 }
