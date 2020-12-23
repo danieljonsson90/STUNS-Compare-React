@@ -5,7 +5,11 @@ import Wrapper from "./Wrapper.jsx";
 import { usePanelsStateContext, usePanelsDispatchContext } from "./Contexts";
 import Checkbox from "./Checkbox.jsx";
 import Header from "./Header.jsx";
-const headerTitle = "Jämför Solpaneler";
+import HeaderImage from "./HeaderImage.jsx";
+
+const HeaderTitle = "Jämför Solpaneler";
+const FirstButtonText = "Jämför alla";
+const SecondButtonText = "Jämför Valda";
 
 function ListView(props) {
   const { selectablePanels } = usePanelsStateContext();
@@ -41,23 +45,14 @@ function ListView(props) {
   return (
     <div>
       <Header>
-        <Navbar>
-          <a href="https://energiportalregionuppsala.se/">Hem</a>
-          <a href="./About.html">Om projektet</a>
-        </Navbar>
-        <h1>{headerTitle}</h1>
-        <div>
-          <a href="https://energiportalregionuppsala.se/">
-            <img
-              className="STUNSenergi"
-              src={"./img/STUNSenergi.png"}
-              alt={"STUNSenergi"}
-            />
-          </a>
-        </div>
-        <button onClick={() => ChangeView("Compare All")}>Jämför alla</button>
+        <Navbar></Navbar>
+        <h1>{HeaderTitle}</h1>
+        <HeaderImage />
+        <button onClick={() => ChangeView("Compare All")}>
+          {FirstButtonText}
+        </button>
         <button onClick={() => ChangeView("Compare Selected")}>
-          Jämför Markerade
+          {SecondButtonText}
         </button>
       </Header>
       <Wrapper classProp="listWrapper">

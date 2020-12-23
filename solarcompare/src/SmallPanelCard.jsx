@@ -1,6 +1,8 @@
 import React from "react";
 
 function SmallPanelCard(props) {
+  console.log("panel", props.panel);
+  console.log("id", props.panel.id);
   return (
     <div className="SmallPanelCard">
       <button value={props.panel.id} onClick={props.onClick}>
@@ -25,7 +27,7 @@ function SmallPanelCard(props) {
               {props.panel.celltype}
             </li>
             <li>
-              <strong>Maxeffekt (kWp) : </strong>
+              <strong>Maxeffekt (kWp): </strong>
               {props.panel.power}
             </li>
           </ul>

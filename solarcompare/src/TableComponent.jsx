@@ -36,10 +36,12 @@ function TableComponent(props) {
           </div>
         </div>
       );
-    } else if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+    } else if (TableHeadersAndKeys[tableHeaderIndex].key === "-") {
       return "";
-    } else if (
-      tableHeaderIndex === 7 &&
+    } // Denna if-sats nedan kan tas bort om värdet i APIet för Efficiency
+    // ändras till % istället för decimalform.
+    else if (
+      TableHeadersAndKeys[tableHeaderIndex].key === "Efficiency" &&
       panel.properties.find(
         (prop) => prop.key === TableHeadersAndKeys[tableHeaderIndex].key
       )
@@ -66,14 +68,13 @@ function TableComponent(props) {
       <table id="solarPanels">
         <tbody>
           {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
-            if (tableHeaderIndex === 1 || tableHeaderIndex === 8) {
+            if (TableHeadersAndKeys[tableHeaderIndex].key === "-") {
               RowId = "TableHeadline";
             } else {
               RowId = "";
             }
             return (
               <tr key={tableHeaderIndex} id={RowId}>
-                {/*<th id="firstColumn">{data.Header}</th>*/}
                 {props.panels.map((panel, panelIndex) => {
                   if (props.selectablePanels[panelIndex].selected) {
                     return (

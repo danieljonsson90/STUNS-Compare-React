@@ -142,8 +142,7 @@ tr:nth-child(1):hover {
 
 .RemoveButtonContainer {
     position: relative;
-    left: 46%;
-    bottom: 90%;
+    left: 45%;
 }
 
 .RemoveButtonContainer button {
@@ -172,7 +171,19 @@ tr:nth-child(1):hover {
 .tableHeaders {
     grid-column-start: 1;
     grid-column-end: 2;
-    margin-top: 282px;
+    margin-top: 281px;
+}
+
+.tableHeaders tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.tableHeaders tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.tableHeaders tr:hover {
+    background-color: #ddd;
 }
 
 

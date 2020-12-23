@@ -1,5 +1,5 @@
 [{
-        "key": "-",
+        "key": "--",
         "Header": ""
     },
     {
@@ -31,27 +31,31 @@
         "Header": "Effektivitet (%)"
     },
     {
+        "key": "Power",
+        "Header": "Maxeffekt (kWp)"
+    },
+    {
         "key": "-",
         "Header": "Mått"
     },
     {
         "key": "Height",
-        "Header": "Höjd"
+        "Header": "Höjd (mm)"
     },
     {
         "key": "Width",
-        "Header": "Bredd"
+        "Header": "Bredd (mm)"
     },
     {
         "key": "Weight",
-        "Header": "Vikt"
+        "Header": "Vikt (kg)"
     },
     {
         "key": "Thickness",
-        "Header": "Tjocklek"
+        "Header": "Tjocklek (mm)"
     },
     {
-        "key": "-",
+        "key": "--",
         "Header": "Läs mer"
     }
 ]
