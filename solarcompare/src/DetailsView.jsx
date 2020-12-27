@@ -7,14 +7,21 @@ import Header from "./Header.jsx";
 import HeaderImage from "./HeaderImage.jsx";
 import TableWithHeaders from "./TableWithHeaders.jsx";
 import SideMenu from "./SideMenu.jsx";
+import {
+  TableAndSideMenu,
+  HeaderHeadLine,
+  DetailWrapper,
+  HeaderButtons,
+} from "./styles";
 
-const headerTitle = "Tabell för Solpaneler";
+const HeaderTitle = "Tabell för Solpaneler";
+const HeaderButtonText = "Tillbaka";
 
 function DetailsView(props) {
   const { selectablePanels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
 
-  function handleClickUnselectAll() {
+  function UnselectAll() {
     dispatch({
       type: "UnSelectAll",
     });
@@ -22,7 +29,7 @@ function DetailsView(props) {
   }
 
   function handleClick({ target }) {
-    // value för img i SmallPanelCard är undefined men inte id
+    // value för img i SmallPanelCard i sideMenu är undefined men inte id
     // därav denna if sats.
     if (target.id !== "") target.value = target.id;
     dispatch({
@@ -32,15 +39,17 @@ function DetailsView(props) {
   }
 
   return (
-    <Wrapper classProp="detailWrapper">
+    <Wrapper style={DetailWrapper}>
       <Header>
         <Navbar></Navbar>
-        <h1>{headerTitle}</h1>
+        <h1 style={HeaderHeadLine}>{HeaderTitle}</h1>
         <HeaderImage />
-        <button onClick={handleClickUnselectAll}>Tillbaka</button>
+        <button onClick={UnselectAll} style={HeaderButtons}>
+          {HeaderButtonText}
+        </button>
       </Header>
       {selectablePanels ? (
-        <div className="TableAndSideMenu">
+        <div style={TableAndSideMenu}>
           <TableWithHeaders />
           <TableComponent onClick={handleClick} />
           <SideMenu onClick={handleClick} />

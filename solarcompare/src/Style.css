@@ -1,0 +1,120 @@
+/*////////////////////////ListView/////////////////////////*/
+
+.Card {
+    background: #fff;
+    border: 5px solid #fff;
+    border-radius: 5px;
+    margin: 10px 10px;
+    height: 300px;
+    width: 23%;
+    justify-content: center;
+    box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+    transition: box-shadow 0.1s ease-in-out;
+    text-align: left;
+}
+
+.Card:hover {
+    box-shadow: 0 12px 24px #999, 0 12px 24px #999;
+}
+
+.Card>.img-container {
+    height: 80%;
+    overflow: hidden;
+}
+
+.Card>.img-container>img {
+    width: 80%;
+}
+
+.checkboxContainer {
+    position: relative;
+    left: 90%;
+    bottom: 80%;
+    width: fit-content;
+}
+
+.checkboxContainer input {
+    cursor: pointer;
+}
+
+
+/*////////////////////////DetailView/////////////////////////*/
+
+
+/*StylesForTables*/
+
+table {
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    text-align: center;
+    height: 50px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+tr:nth-child(1):hover {
+    background-color: #fff;
+}
+
+#TableHeadline {
+    background: #777;
+}
+
+.XButtonContainer {
+    position: relative;
+    left: 45%;
+}
+
+.XButtonContainer button {
+    cursor: pointer;
+}
+
+.tableForHeaders {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-top: 281px;
+}
+
+.tableForHeaders tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.tableForHeaders tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.tableForHeaders tr:hover {
+    background-color: #ddd;
+}
+
+
+/*SideMenuStyles*/
+
+.sideMenuContainer {
+    display: flex;
+    flex-flow: column wrap;
+    grid-column-start: 3;
+    text-align: center;
+    margin-left: 3%;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.sideMenuContainer p {
+    margin-top: 0;
+    font-size: 25px;
+    background-color: #aaa;
+    color: #fff;
+    margin-bottom: 5px;
+    vertical-align: center;
+}

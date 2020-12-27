@@ -5,7 +5,7 @@ function HeaderImage() {
     <div>
       <a href="https://energiportalregionuppsala.se/">
         <img
-          className="STUNSenergi"
+          style={{ width: "50%", margin: "auto" }}
           src={"./img/STUNSenergi.png"}
           alt={"STUNSenergi"}
         />

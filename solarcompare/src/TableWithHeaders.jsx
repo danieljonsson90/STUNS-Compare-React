@@ -4,7 +4,7 @@ import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
 function TableWithHeaders() {
   let RowId;
   return (
-    <table className="tableHeaders">
+    <table className="tableForHeaders">
       <tbody>
         {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
           if (tableHeaderIndex === 0) return <></>;
@@ -15,7 +15,7 @@ function TableWithHeaders() {
           }
           return (
             <tr key={tableHeaderIndex} id={RowId}>
-              <th id="firstColumn">{data.Header}</th>
+              <th>{data.Header}</th>
             </tr>
           );
         })}

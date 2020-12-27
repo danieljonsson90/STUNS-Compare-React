@@ -1,26 +1,20 @@
 import React from "react";
-import SmallPanelCard from "./SmallPanelCard.jsx";
+import SmallCard from "./SmallCard.jsx";
 import { usePanelsStateContext } from "./Contexts";
-
-const sideMenuTitle = "Lägg till Paneler";
-
+import SideMenuTitle from "./SideMenuTitle.jsx";
 function SideMenu(props) {
   const { selectablePanels } = usePanelsStateContext();
-  function RenderSideMenuTitle() {
-    for (let panel of selectablePanels) {
-      if (!panel.selected) return <p>{sideMenuTitle}</p>;
-    }
-  }
+
   return (
     <div className="sideMenuContainer">
-      <div className="sideMenuTitle">{RenderSideMenuTitle()}</div>
+      <SideMenuTitle />
       {selectablePanels.map((selectablePanel, index) => {
         if (!selectablePanel.selected) {
           return (
-            <SmallPanelCard
+            <SmallCard
               key={index}
               onClick={props.onClick}
-              panel={selectablePanel}
+              item={selectablePanel}
             />
           );
         }

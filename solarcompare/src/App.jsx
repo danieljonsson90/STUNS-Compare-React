@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./StartView.css";
+import "./Style.css";
 import ListView from "./ListView";
 import DetailsView from "./DetailsView";
 import { PanelsProvider } from "./Contexts";

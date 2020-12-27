@@ -1,4 +1,4 @@
-import PanelCard from "./PanelCard.jsx";
+import ListViewCard from "./ListViewCard.jsx";
 import React from "react";
 import Navbar from "./Navbar.jsx";
 import Wrapper from "./Wrapper.jsx";
@@ -6,6 +6,7 @@ import { usePanelsStateContext, usePanelsDispatchContext } from "./Contexts";
 import Checkbox from "./Checkbox.jsx";
 import Header from "./Header.jsx";
 import HeaderImage from "./HeaderImage.jsx";
+import { HeaderButtons, HeaderHeadLine, ListWrapper } from "./styles";
 
 const HeaderTitle = "Jämför Solpaneler";
 const FirstButtonText = "Jämför alla";
@@ -22,21 +23,21 @@ function ListView(props) {
     });
   }
 
-  function ChangeView(str) {
-    switch (str) {
-      case "Compare All":
+  function ChangeView({ target }) {
+    switch (target.innerHTML) {
+      case FirstButtonText:
         dispatch({
           type: "SelectAll",
         });
         props.changeView("DetailsView");
         break;
-      case "Compare Selected":
+      case SecondButtonText:
         for (let panel of selectablePanels) {
           if (panel.selected) {
             return props.changeView("DetailsView");
           }
         }
-        alert("Du måste checka i någon panel");
+        alert("Du måste välja någon panel");
         break;
       default:
     }
@@ -46,20 +47,20 @@ function ListView(props) {
     <div>
       <Header>
         <Navbar></Navbar>
-        <h1>{HeaderTitle}</h1>
+        <h1 style={HeaderHeadLine}>{HeaderTitle}</h1>
         <HeaderImage />
-        <button onClick={() => ChangeView("Compare All")}>
+        <button onClick={ChangeView} style={HeaderButtons}>
           {FirstButtonText}
         </button>
-        <button onClick={() => ChangeView("Compare Selected")}>
+        <button onClick={ChangeView} style={HeaderButtons}>
           {SecondButtonText}
         </button>
       </Header>
-      <Wrapper classProp="listWrapper">
+      <Wrapper style={ListWrapper}>
         {selectablePanels.map((panel, index) => (
-          <PanelCard
+          <ListViewCard
             key={index}
-            solarpanel={panel}
+            item={panel}
             checkBox={<Checkbox value={panel.id} onChange={handleChange} />}
           />
         ))}

@@ -2,23 +2,23 @@ import React from "react";
 
 function TextForCard(props) {
   return (
-    <div className="img-content">
-      <ul>
+    <div style={props.styleTextContainer}>
+      <ul style={props.styleUl}>
         <li>
           <strong>Märke: </strong>
-          {props.solarpanel.brand}
+          {props.item.brand}
         </li>
         <li>
           <strong>Model: </strong>
-          {props.solarpanel.model}
+          {props.item.model}
         </li>
         <li>
           <strong>Celltyp: </strong>
-          {props.solarpanel.celltype}
+          {props.item.celltype}
         </li>
         <li>
           <strong>Maxeffekt (kWp): </strong>
-          {props.solarpanel.power}
+          {props.item.power}
         </li>
       </ul>
     </div>

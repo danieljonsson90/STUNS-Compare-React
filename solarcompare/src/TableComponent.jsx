@@ -2,18 +2,7 @@ import React from "react";
 import TableHeadersAndKeys from "./TableHeadersAndKeys.json";
 import RenderTableData from "./RenderTableData.jsx";
 import { usePanelsStateContext } from "./Contexts";
-
-const TableStyles = {
-  width: "100%",
-  margin: "auto",
-  marginLeft: "0",
-  marginRight: "1%",
-  marginTop: "0",
-  overflow: "auto",
-  gridColumnStart: "2",
-  gridColumnEnd: "3",
-  gridRowStart: "1",
-};
+import { TableStyles } from "./styles";
 
 let RowId;
 
@@ -21,10 +10,10 @@ function TableComponent(props) {
   const { selectablePanels, panels } = usePanelsStateContext();
   return (
     <div style={TableStyles}>
-      <table id="solarPanels">
+      <table>
         <tbody>
-          {TableHeadersAndKeys.map((data, tableHeaderIndex) => {
-            if (TableHeadersAndKeys[tableHeaderIndex].key === "-") {
+          {TableHeadersAndKeys.map((dataObject, tableHeaderIndex) => {
+            if (dataObject.key === "-") {
               RowId = "TableHeadline";
             } else {
               RowId = "";
@@ -37,7 +26,7 @@ function TableComponent(props) {
                       <td key={panelIndex}>
                         <RenderTableData
                           panel={panel}
-                          tableHeaderIndex={tableHeaderIndex}
+                          dataObject={dataObject}
                           panelIndex={panelIndex}
                           onClick={props.onClick}
                         />
