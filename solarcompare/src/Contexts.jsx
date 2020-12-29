@@ -6,6 +6,9 @@ const PanelsDispatchContext = React.createContext();
 
 const APIURL = "https://stunssolar.azurewebsites.net/api/devices";
 
+// Här kanske jag ska kolla om det är solpaneler eller anläggningar jag vill kolla och isf
+// göra på olika sätt.
+
 function reducer(state, action) {
   switch (action.type) {
     case "init":
@@ -69,6 +72,7 @@ function getPanelsForLists(panels) {
         panel.properties.find((prop) => prop.key === "Model").value === "P6_62"
       );
       else {
+        //Här kan jag eventuellt bara pusha selected och images till panel och ha en lista som state.
         acc[0].selectablePanels.push({
           id: panel.identity,
           selected: false,
@@ -96,6 +100,7 @@ function PanelsProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, {
     panels: [],
     selectablePanels: [],
+    sites: [],
   });
 
   React.useEffect(() => {
@@ -105,6 +110,7 @@ function PanelsProvider({ children }) {
         data: {
           panels: getPanelsForLists(res.data)[0].panels,
           selectablePanels: getPanelsForLists(res.data)[0].selectablePanels,
+          sites: [],
         },
       });
     });

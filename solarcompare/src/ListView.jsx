@@ -13,9 +13,9 @@ const FirstButtonText = "Jämför alla";
 const SecondButtonText = "Jämför Valda";
 
 function ListView(props) {
-  const { selectablePanels } = usePanelsStateContext();
+  const { selectablePanels, panels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-
+  console.log(panels);
   function handleChange({ target }) {
     dispatch({
       type: "toggleSelected",
@@ -37,7 +37,7 @@ function ListView(props) {
             return props.changeView("DetailsView");
           }
         }
-        alert("Du måste välja någon panel");
+        alert("Du måste välja något att jämföra");
         break;
       default:
     }

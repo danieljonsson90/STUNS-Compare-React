@@ -23,6 +23,10 @@
         "Header": "Celltyp"
     },
     {
+        "key": "Celltech",
+        "Header": "Cellteknik"
+    },
+    {
         "key": "Busbars",
         "Header": "Strömskenor"
     },
