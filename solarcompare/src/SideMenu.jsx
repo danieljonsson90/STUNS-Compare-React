@@ -2,6 +2,7 @@ import React from "react";
 import SmallCard from "./SmallCard.jsx";
 import { usePanelsStateContext } from "./Contexts";
 import SideMenuTitle from "./SideMenuTitle.jsx";
+
 function SideMenu(props) {
   const { selectablePanels } = usePanelsStateContext();
 

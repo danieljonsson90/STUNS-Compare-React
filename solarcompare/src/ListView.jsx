@@ -13,9 +13,9 @@ const FirstButtonText = "Jämför alla";
 const SecondButtonText = "Jämför Valda";
 
 function ListView(props) {
-  const { selectablePanels, panels } = usePanelsStateContext();
+  const { selectablePanels } = usePanelsStateContext();
   const dispatch = usePanelsDispatchContext();
-  console.log(panels);
+
   function handleChange({ target }) {
     dispatch({
       type: "toggleSelected",
